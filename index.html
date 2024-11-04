@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verificador de Poliedros Eulerianos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            width: 300px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        #result {
+            margin-top: 15px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Verificador de Poliedros Eulerianos</h2>
+        <label for="vertices">Número de Vértices (V):</label>
+        <input type="number" id="vertices" min="1" required>
+
+        <label for="edges">Número de Arestas (E):</label>
+        <input type="number" id="edges" min="1" required>
+
+        <label for="faces">Número de Faces (F):</label>
+        <input type="number" id="faces" min="1" required>
+
+        <button onclick="verificarPoliedro()">Verificar</button>
+
+        <div id="result"></div>
+    </div>
+
+    <script>
+        function verificarPoliedro() {
+            const vertices = parseInt(document.getElementById("vertices").value);
+            const edges = parseInt(document.getElementById("edges").value);
+            const faces = parseInt(document.getElementById("faces").value);
+
+            if (isNaN(vertices) || isNaN(edges) || isNaN(faces)) {
+                document.getElementById("result").innerText = "Por favor, insira todos os valores.";
+                return;
+            }
+
+            const isEulerian = vertices - edges + faces === 2;
+
+            if (isEulerian) {
+                document.getElementById("result").innerText = "O poliedro é euleriano.";
+            } else {
+                document.getElementById("result").innerText = "O poliedro não é euleriano.";
+            }
+        }
+    </script>
+</body>
+</html>
